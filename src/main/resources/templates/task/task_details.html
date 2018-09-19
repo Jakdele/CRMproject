@@ -1,0 +1,30 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorator="main-layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Home page</title>
+</head>
+<body>
+<div layout:fragment="content">
+<div th:object="${task}">
+    <table>
+        <tr>
+            <th>Subject</th>
+            <th>Description</th>
+            <th>Assigned user</th>
+            <th>Status</th>
+            <th>Priority</th>
+            <th>Actions</th>
+        </tr>
+        <tr>
+            <td th:text="*{subject}"></td>
+            <td th:text="*{description}"></td>
+            <td th:text="*{user.login}"></td>
+            <td th:text="*{status.name}"></td>
+            <td th:text="*{priority.name}"></td>
+            <td><a th:href="@{'/task/edit/'+${task.id}}" th:text="'Edit task'"></a></td>
+        </tr>
+    </table>
+</div>
+</div>
+</body>
+</html>

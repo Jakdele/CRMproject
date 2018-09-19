@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="main-layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit project</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <form th:action="@{/project/edit}" method="post" th:object="${project}">
+        <input th:type="hidden" th:field="*{id}" th:value="*{id}"/>
+        <input th:type="hidden" th:field="*{created}" th:value="*{created}"/>
+        <input th:type="hidden" th:field="*{users}" th:value="*{users}"/>
+        <p>Name: <input th:type="text" th:field="*{name}"/></p>
+        <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</p>
+        <p>Description: <input th:type="text" th:field="*{description}"/></p>
+        <p th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Description Error</p>
+        <p>URL Address: <input th:type="text" th:field="*{url_address}"/></p>
+        <p th:if="${#fields.hasErrors('website')}" th:errors="*{website}">Address Error</p>
+        <p><input type="submit" value="Submit"/></p>
+    </form>
+</div>
+</body>
+</html>

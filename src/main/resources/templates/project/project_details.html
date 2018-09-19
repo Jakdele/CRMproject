@@ -1,0 +1,54 @@
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="main-layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Project details</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+    <div th:object="${project}">
+        <table>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Created on</th>
+                <th>Tasks</th>
+                <th>Details</th>
+                <th>Add task</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td th:text="*{name}"></td>
+                <td th:text="*{description}"></td>
+                <td th:text="*{created}"></td>
+                <td><a th:href="@{'/project/tasks/' + ${project.id}}" th:text="'Show tasks'"></a></td>
+                <td><a th:href="@{'/project/details/' + ${project.id}}" th:text="'Show details'"></a></td>
+                <td><a th:href="@{'/task/add/' + ${project.id}}" th:text="'Add task'"></a></td>
+            </tr>
+            </tbody>
+        </table>
+    <table>
+        <thead>
+        <tr>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>User ID</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${project.users}">
+            <td th:text=" ${user.firstName}  "></td>
+            <td th:text=" ${user.lastName} "></td>
+            <td th:text=" ${user.id} "></td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+</div>
+</body>
+</html>

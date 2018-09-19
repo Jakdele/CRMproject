@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="main-layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Home page</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <table>
+        <thead>
+        <tr>
+            <th>Projects</th>
+            <th>Users</th>
+            <th>Statuses</th>
+            <th>Priorities</th>
+        </tr>
+        </thead>
+        <tbody >
+        <tr>
+            <td ><a th:href="@{'/project/list'}" th:text="'Project list'"></a>,
+                <a th:href="@{'/project/add'}" th:text="'Add a new project'"></a> </td>
+            <td ><a th:href="@{'/user/list'}" th:text="'User list'"></a>,
+                <a th:href="@{'/user/add'}" th:text="'Add a new user'"></a>  </td>
+            <td ><a th:href="@{'/status/list'}" th:text="'Status list'"></a>,
+                <a th:href="@{'/status/add'}" th:text="'Add a new status'"></a>  </td>
+            <td ><a th:href="@{'/priority/list'}" th:text="'Priority list'"></a> ,
+                <a th:href="@{'/priority/add'}" th:text="'Add a new priority'"></a> </td>
+        </tr>
+        </tbody>
+    </table>
+    </table>
+<hr>
+    <h3>Recent projects</h3>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Created on</th>
+            <th>Details</th>
+        </tr>
+        </thead>
+        <tbody >
+        <tr th:each="project, iterStat: ${projects}" th:object="${project}">
+            <td th:text="*{name}"></td>
+            <td th:text="*{description}"></td>
+            <td th:text="*{created}"></td>
+            <td ><a th:href="@{'/project/details/' + ${project.id}}" th:text="'Show details'"></a> </td>
+        </tr>
+        </tbody>
+    </table>
+<h3>Recent activities</h3>
+    <table>
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Description</th>
+            <th>Created on</th>
+            <th>Details</th>
+        </tr>
+        </thead>
+        <tbody >
+        <tr th:each="activity, iterStat: ${activities}" th:object="${activity}">
+            <td th:text="*{id}"></td>
+            <td th:text="*{content}"></td>
+            <td th:text="*{created}"></td>
+            <td th:if="${activity.activityId!=0}"><a th:href="@{'/project/details/' + ${activity.activityId}}" th:text="'Show project details'"></a> </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

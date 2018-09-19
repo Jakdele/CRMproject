@@ -1,0 +1,28 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="main-layout">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Project details</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <form th:action="@{/task/change_status}" method="post" th:object="${task}">
+        <input th:type="hidden" th:value="*{project}" th:field="*{project}"/>
+        <input th:type="hidden" th:value="*{subject}" th:field="*{subject}"/>
+        <input th:type="hidden" th:value="*{description}" th:field="*{description}"/>
+        <input th:type="hidden" th:value="*{user}" th:field="*{user}"/>
+        <input th:type="hidden" th:value="*{priority}" th:field="*{priority}"/>
+        <p>Status:
+            <select th:field="*{status}">
+                <option value=""> --</option>
+                <option th:each="status : ${statuses}" th:value="${status.id}" th:text="${status.name}"/>
+            </select>
+            <a th:href="@{/status/add}"> ADD STATUS </a>
+        </p>
+        <p th:if="${#fields.hasErrors('status')}" th:errors="*{status}">status Error</p>
+        <p><input type="submit" value="Submit"/></p>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorator="main-layout">
+<div layout:fragment="content">
+    <table>
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name </th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="priority:${priorities}" th:object="${priority}">
+            <td th:text="*{id}"></td>
+            <td th:text="*{name}"></td>
+            <td><span th:text="*{active}"></span>
+                <a th:href="@{'/priority/change-status/'+${priority.id}}">
+                    <span th:if="*{active}" th:text="'Deactivate'"></span>
+                    <span th:if="*{!active}" th:text="'Activate'"></span>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+</html>

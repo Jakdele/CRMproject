@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="main-layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Project List</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Created on</th>
+            <th>Tasks</th>
+            <th>Details</th>
+            <th>Add task</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="project, iterStat: ${projects}" th:object="${project}">
+            <td th:text="*{name}"></td>
+            <td th:text="*{description}"></td>
+            <td th:text="*{created}"></td>
+            <td><a th:href="@{'/project/tasks/' + ${project.id}}" th:text="'Show tasks'"></a></td>
+            <td><a th:href="@{'/project/details/' + ${project.id}}" th:text="'Show details'"></a></td>
+            <td><a th:href="@{'/task/add/' + ${project.id}}" th:text="'Add task'"></a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
